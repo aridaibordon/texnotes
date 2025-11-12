@@ -1,0 +1,7 @@
+[project]
+name = "TexNotes"
+version = "0.1.0"
+description = "A note manager for daily tex files"
+readme = "README.md"
+authors = [{ name = "Aridai Bordón" }]
+requires-python = ">=3.11"
