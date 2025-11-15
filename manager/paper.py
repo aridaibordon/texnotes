@@ -2,9 +2,12 @@ import subprocess
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable, Dict
 
-from config import PAPER_FOLDER
+from config import PAPER_PATH
+from registry import Registry
+
+
+registry = Registry()
 
 
 @dataclass
@@ -21,8 +24,9 @@ def get_paper_layout(root: str) -> dict:
     }
 
 
+@registry.add(flags=["-c", "--create"], help="create new paper")
 def create_paper(args: PaperArgs) -> None:
-    path = PAPER_FOLDER / args.name
+    path = PAPER_PATH / args.name
     layout = get_paper_layout(path.resolve())
 
     for folder, files in layout.items():
@@ -34,8 +38,9 @@ def create_paper(args: PaperArgs) -> None:
             fpath.touch()
 
 
+@registry.add(flags=["--compile"], help="compile paper")
 def compile_paper(args: PaperArgs):
-    path = PAPER_FOLDER / args.name
+    path = PAPER_PATH / args.name
     if not path.is_dir():
         raise NotADirectoryError(f"{path} is not a directory.")
 
@@ -57,9 +62,3 @@ def compile_paper(args: PaperArgs):
             str(path / "main.tex"),
         ]
     )
-
-
-func_map: Dict[str, Callable] = {
-    "create_paper": create_paper,
-    "compile_paper": compile_paper,
-}

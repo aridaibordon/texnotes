@@ -3,9 +3,12 @@ import shutil
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Callable, Dict
 
-from config import NOTE_FOLDER, NOTE_TEMPLATE
+from config import NOTE_PATH, NOTE_TEMPLATE
+from registry import Registry
+
+
+registry = Registry()
 
 
 @dataclass
@@ -15,9 +18,10 @@ class NoteArgs:
 
 
 def get_note_path(date: datetime) -> Path:
-    return NOTE_FOLDER / date.strftime("%Y.%m.%d")
+    return NOTE_PATH / date.strftime("%Y.%m.%d")
 
 
+@registry.add(flags=["-c", "--create"], help="create new daily note")
 def create_note(args: NoteArgs) -> None:
     date = datetime.strptime(args.date, "%d.%m.%Y").date()
 
@@ -26,6 +30,7 @@ def create_note(args: NoteArgs) -> None:
     shutil.copy(NOTE_TEMPLATE, note_path / "main.tex")
 
 
+@registry.add(flags=["-d", "--delete"], help="delete daily note")
 def delete_note(args: NoteArgs) -> None:
     date = datetime.strptime(args.date, "%d.%m.%Y").date()
 
@@ -33,9 +38,10 @@ def delete_note(args: NoteArgs) -> None:
     shutil.rmtree(note_path)
 
 
+@registry.add(flags=["-clr", "--clear"], help="clear auxiliary tex files")
 def clear_notes(args: NoteArgs) -> None:
     """Remove auxiliary tex files from notes folder"""
-    for note_path in NOTE_FOLDER.iterdir():
+    for note_path in NOTE_PATH.iterdir():
         if note_path.is_file() or note_path.name.startswith("."):
             continue
 
@@ -44,10 +50,3 @@ def clear_notes(args: NoteArgs) -> None:
                 continue
 
             path.unlink()
-
-
-func_map: Dict[str, Callable] = {
-    "create_note": create_note,
-    "delete_note": delete_note,
-    "clear_notes": clear_notes,
-}
