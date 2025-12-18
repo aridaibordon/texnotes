@@ -1,0 +1,91 @@
+\documentclass[xcolor=dvipsnames,10pt]{beamer}
+\usetheme{Luebeck}
+
+\usepackage{graphicx}
+\graphicspath{{../}{figures/}}
+
+\definecolor{ulpgcblue}{cmyk}{1,0.72,0,0.49}
+\definecolor{ulpgcorange}{rgb}{1,0.60,0}
+
+\usepackage[justification=centering,labelfont={color=ulpgcblue,bf}]{caption}
+\usepackage{color}
+\usepackage{subfig}
+
+\setbeamercolor{background canvas}{bg=ulpgcblue!10}
+\setbeamercolor{caption name}{fg=ulpgcblue}
+\setbeamercolor{mainbox}{fg=ulpgcblue,bg=ulpgcorange!90}
+
+\renewcommand\footnoterule{{\color{ulpgcorange!80}\rule{150pt}{.5pt}}\vspace*{.8mm}}
+\renewcommand\thefootnote{\textcolor{ulpgcblue}{[\arabic{footnote}]}}
+\renewcommand{\footnotesize}{\scriptsize}
+
+\newcommand{\includeboxgraphic}[2]{\fbox{\includegraphics[#1]{#2}}}
+\newcommand{\ulpgccite}[5]{#1, \textit{#2} \textbf{#3}, #4 (#5)}
+
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{navigation symbols}{}
+
+\setbeamertemplate{frametitle}{
+\begin{beamercolorbox}[wd=\paperwidth,sep=0.35cm,left]{frametitle}
+    \usebeamerfont{frametitle}
+    \insertframetitle
+\end{beamercolorbox}
+}
+
+\setlength{\fboxsep}{0pt}%
+\setlength{\fboxrule}{.3pt}%
+
+\setbeamertemplate{footline}
+{
+    \leavevmode%
+    \hbox{%
+    \begin{beamercolorbox}[wd=.275\paperwidth,ht=3ex,dp=2ex,center]{date in head/foot}%
+        \usebeamerfont{author in head/foot}\insertshortauthor\hspace{1ex}
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.45\paperwidth,ht=3ex,dp=2ex,center]{title in head/foot}%
+        \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.275\paperwidth,ht=3ex,dp=2ex,center]{date in head/foot}%
+        \usebeamerfont{date in head/foot}\insertshortdate\hfill(\insertframenumber{} / \inserttotalframenumber)
+    \end{beamercolorbox}
+    }%
+}
+
+\newcommand{\mainbox}[2]{
+    \hfill
+    \begin{beamercolorbox}[wd=#1\textwidth,sep=.4em,rounded=true, center]{mainbox}
+    #2
+    \end{beamercolorbox}
+    \hfill
+}
+
+\title[Short title]{Very very very very very\\very long title}
+\author[A. Bordón @ iUNAT -- ULPGC]{A. Bordón\inst{1}, R. Florido\inst{1}, G. Pérez-Callejo\inst{2}, M. A. Gigosos\inst{2},\\M. Bailly-Grandvaux\inst{3}, C. A. Walsh\inst{4}, F. N. Beg\inst{3}, R. C. Mancini\inst{5},\\F. Suzuki-Vidal\inst{6}, C. Vlachos\inst{7} and J. J. Santos\inst{7}.}
+
+\institute
+{
+\inst{1}{iUNAT - Departamento de Física, Universidad de Las Palmas de Gran Canaria (Spain)}
+\inst{2}{Departamento de Física Teórica, Atómica y Óptica, Universidad de Valladolid (Spain)}\\
+\inst{3}{Center for Energy Research, University of California (USA)}\\
+\inst{4}{Lawrence Livermore Laboratory (USA)}\\
+\inst{5}{Department of Physics, University of Nevada, Reno (USA)}\\
+\inst{6}{First Light Fusion (UK)}\\
+\inst{7}{Centre Lasers Intenses et Applications, Université de Bordeux (France)}
+}
+
+\date[Alternative date text]{\vspace*{1mm}23 October, 1996}
+
+\titlegraphic{%
+    \vspace*{-6mm}
+    \includegraphics[width=.3\linewidth]{ulpgc.png}
+}
+
+\begin{document}
+\frame[plain]{\titlepage}
+\frame[plain]{\tableofcontents}
+
+\section{Introduction}
+
+% insert your slides here
+
+\end{document}

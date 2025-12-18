@@ -47,7 +47,10 @@ def main() -> None:
         )
 
     args = parser.parse_args()
-    print(args)
+    if not getattr(args, "command"):
+        parser.print_help()
+        return
+
     for registry_item in func_map[args.command]:
         if getattr(args, registry_item.command):
             registry_item.func(args)
